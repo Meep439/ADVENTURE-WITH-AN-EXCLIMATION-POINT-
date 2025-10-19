@@ -2,6 +2,8 @@
 
 #init modules
 from loggy import *
+from time import time, sleep
+import sys
 
 #init commands
 def shortCommands(inp):
@@ -23,7 +25,7 @@ time   = "night"
 print("A  D  V  E  N  T  U  R  E   W H I T H   A N   E X C L I M A T I O N   P O I N T !")
 choice = input('Type "begin" to start the game. Type "help" to view the instructions.\n> ')
 if choice.lower() == "help":
-    print("The commands are:\n\ttake:\t\tTake the object.\n\tinspect:\tLook at the object.\n\tuse:\t\tuse the object, put an object down down, stick your hand in the object, etc.\n\nHint: the object you need is not always listed.")
+    print("The commands are:\n\ttake:\t\tTake the object.\n\tinspect:\tLook at the object.\n\tuse:\t\tuse the object, put an object down down, stick your hand in the object, etc.\n\twander:\t\twalk around.\nHint: the object you need is not always listed.")
     input("Press enter to begin!")
 
 print("You wake up in a room with a bed and a lamp.")
@@ -130,4 +132,28 @@ while r != "yay":
     if r == False:
         print("I don't understand.")
 
-print("You climb through the hole into a dark cave.")
+print("You climb through the hole into a dark cave. There is a metal on the floor.")
+
+def cave(c):
+    global inv
+    if c == "inspect metal":
+        print("It's flint. Isn't that used for starting fires?")
+        return True
+    if c == "use flint":
+        print("You try to start a fire.")
+        for i in range(9):
+            print("Tick...")
+            log(i+1)
+        print("It worked! You now have a torch.")
+        inv += ["torch"]
+        return True
+    if c == "inspect cave":
+        if "torch" in inv:
+            print("You see a bat. It looks angry. You lost a life.")
+            health -= 1
+            if health < 0.1:
+                print("You died!")
+                sys.exit()
+        else:
+            print("It's too dark.")
+    
