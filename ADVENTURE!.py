@@ -16,6 +16,14 @@ def shortCommands(inp):
     if inp.lower() == "use":
         print("What do you want to use?")
         return True
+    if inp.lower() == "wander":
+        print("You can't do that here.")
+
+def normalFuncs(inp):
+    inp = inp.lower()
+    shortCommands(inp)
+    if health < 0.1:
+        sys.exit()
 
 #init vars
 health = 5.0
@@ -89,17 +97,22 @@ while r != "yay":
 
 print("You walk outside into a sunny meadow. There is an axe on the ground.")
 def meadow(c):
+    insp = False
     global inv
     if c == "inspect sun":
         print("The sun doesn't look normal, you realize upon closer inspection.")
+        insp = True
         return True
     if c == "take sun":
-        if "ladder" in inv:
-            print("You use the ladder to take the sun. It pops right off of the fake ceiling. There is a hole where it was.\n(type \"use hole\" to climb through it.)")
-            return True
+        if insp == True:
+            if "ladder" in inv:
+                print("You use the ladder to take the sun. It pops right off of the fake ceiling. There is a hole where it was.\n(type \"use hole\" to climb through it.)")
+                return True
+            else:
+                print("It's too far away.")
         else:
-            print("It's too far away.")
-            return True
+            print("WHAT")
+        return True
     if c == "take axe":
         print("You pick up the axe. You now have an axe!")
         inv += ["axe"]
@@ -119,6 +132,8 @@ def meadow(c):
             return True
         else:
             print("You don't have wood.")
+    if c == "use ladder"):
+        print("What for?\nHint: type \"take ###\" to use the ladder")
     if c == "use hole":
         return "yay"
     if c == "devskip":
@@ -156,4 +171,9 @@ def cave(c):
                 sys.exit()
         else:
             print("It's too dark.")
+        return True
+    if c == "wander":
+        print("You hear a faint click. use \"inspect click\" to check it out.")
+    if c == "inspect click":
+        print("You find an even deeper and darker part of the cave.")
     
