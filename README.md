@@ -8,4 +8,6 @@ Take:     Pick up the object
 
 Inspect:  Look at the object
 
+Wander:   Walk around
+
 Use:      Everything else
